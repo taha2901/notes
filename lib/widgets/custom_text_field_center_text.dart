@@ -19,7 +19,8 @@ class CustomTextFieldCenterlable extends StatefulWidget {
     this.prefixText,
     this.onSubmitted,
     this.controller,
-    this.hintMaxLines, 
+    this.hintMaxLines,
+    this.onSaved,
   }) : super(key: key);
 
   final bool showBorder;
@@ -29,6 +30,7 @@ class CustomTextFieldCenterlable extends StatefulWidget {
   final String? prefixText;
   final Function(String)? onChange;
   final Function(String)? onSubmitted;
+  final void Function(String?)? onSaved;
   final bool? obscure;
   final TextInputType? inputType;
   final IconData? prefixIcon;
@@ -47,6 +49,7 @@ class _CustomTextFieldCenterlableState
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onSaved: widget.onSaved,
       textAlign: TextAlign.start,
       controller: widget.controller,
       cursorColor: kPrimaryColor,
@@ -54,8 +57,8 @@ class _CustomTextFieldCenterlableState
       obscureText: widget.obscure!,
       keyboardType: widget.inputType,
       validator: (data) {
-        if (data!.isEmpty) {
-          return "Value Is Wrong";
+        if (data?.isEmpty ?? true) {
+          return "Failed Is Required";
         }
       },
       onChanged: widget.onChange,
@@ -64,7 +67,7 @@ class _CustomTextFieldCenterlableState
         filled: true,
         fillColor: widget.fillColor,
         hintText: widget.hint,
-        hintMaxLines: widget.hintMaxLines, 
+        hintMaxLines: widget.hintMaxLines,
         hintStyle: const TextStyle(color: kPrimaryColor),
         prefixText: widget.prefixText,
         contentPadding: const EdgeInsets.symmetric(horizontal: 50),
