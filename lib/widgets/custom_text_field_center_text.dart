@@ -83,7 +83,7 @@ class _CustomTextFieldCenterlableState
   // ignore: non_constant_identifier_names
   OutlineInputBorder BuildBorder([color]) {
     return OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.white),
+      borderSide:const BorderSide(color: Colors.white),
       borderRadius: BorderRadius.circular(10),
     );
   }
