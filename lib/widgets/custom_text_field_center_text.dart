@@ -18,12 +18,14 @@ class CustomTextFieldCenterlable extends StatefulWidget {
     this.showBorder = true,
     this.prefixText,
     this.onSubmitted,
-    this.controller, 
+    this.controller,
+    this.hintMaxLines, 
   }) : super(key: key);
 
   final bool showBorder;
   final Color? fillColor;
   final String? hint;
+  final int? hintMaxLines;
   final String? prefixText;
   final Function(String)? onChange;
   final Function(String)? onSubmitted;
@@ -33,13 +35,15 @@ class CustomTextFieldCenterlable extends StatefulWidget {
   final IconData? suffixIcon;
   final VoidCallback? suffixPressed;
   final bool? ispassword;
-  final TextEditingController? controller; 
+  final TextEditingController? controller;
 
   @override
-  State<CustomTextFieldCenterlable> createState() => _CustomTextFieldCenterlableState();
+  State<CustomTextFieldCenterlable> createState() =>
+      _CustomTextFieldCenterlableState();
 }
 
-class _CustomTextFieldCenterlableState extends State<CustomTextFieldCenterlable> {
+class _CustomTextFieldCenterlableState
+    extends State<CustomTextFieldCenterlable> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -54,27 +58,21 @@ class _CustomTextFieldCenterlableState extends State<CustomTextFieldCenterlable>
           return "Value Is Wrong";
         }
       },
-      
       onChanged: widget.onChange,
       onFieldSubmitted: widget.onSubmitted,
       decoration: InputDecoration(
-        
         filled: true,
         fillColor: widget.fillColor,
         hintText: widget.hint,
-        hintStyle:const TextStyle(color: kPrimaryColor),
+        hintMaxLines: widget.hintMaxLines, 
+        hintStyle: const TextStyle(color: kPrimaryColor),
         prefixText: widget.prefixText,
         contentPadding: const EdgeInsets.symmetric(horizontal: 50),
         enabledBorder: BuildBorder(),
         focusedBorder: BuildBorder(kPrimaryColor),
-        border: widget.showBorder
-            ? BuildBorder()
-            : InputBorder.none,
-            
-        prefixIcon:
-            widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
-        suffixIcon:
-            widget.suffixIcon != null ? Icon(widget.suffixIcon) : null,
+        border: widget.showBorder ? BuildBorder() : InputBorder.none,
+        prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+        suffixIcon: widget.suffixIcon != null ? Icon(widget.suffixIcon) : null,
       ),
     );
   }
@@ -82,8 +80,8 @@ class _CustomTextFieldCenterlableState extends State<CustomTextFieldCenterlable>
   // ignore: non_constant_identifier_names
   OutlineInputBorder BuildBorder([color]) {
     return OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.circular(10),
-            );
+      borderSide: BorderSide(color: Colors.white),
+      borderRadius: BorderRadius.circular(10),
+    );
   }
 }
