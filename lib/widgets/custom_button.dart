@@ -11,7 +11,8 @@ class CustomButton extends StatelessWidget {
       this.icon,
       this.width = double.infinity,
       this.height = 60.0,
-      this.circular = 30.0})
+      this.circular = 30.0,
+      this.isLoading = false})
       : super(key: key);
   String? text;
   Color? color;
@@ -21,6 +22,7 @@ class CustomButton extends StatelessWidget {
   final double? width;
   final double? height;
   final double? circular;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -33,21 +35,29 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(circular!),
         ),
         child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                text!,
-                style: TextStyle(color: textcolor),
-              ),
-              const SizedBox(width: 8.0),
-              Icon(
-                icon,
-                color: Colors.white,
-                size: 24.0,
-              ),
-            ],
-          ),
+          child: isLoading
+              ? const SizedBox(
+                  height: 25,
+                  width: 25,
+                  child: CircularProgressIndicator(
+                    color: Colors.black,
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      text!,
+                      style: TextStyle(color: textcolor),
+                    ),
+                    const SizedBox(width: 8.0),
+                    Icon(
+                      icon,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                  ],
+                ),
         ),
       ),
     );
