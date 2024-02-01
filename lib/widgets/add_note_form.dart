@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:notes/constants.dart';
 import 'package:notes/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes/models/note_model.dart';
+import 'package:notes/widgets/colors_list_view.dart';
 import 'package:notes/widgets/custom_button.dart';
 import 'package:notes/widgets/custom_text_field_center_text.dart';
 
@@ -47,10 +48,14 @@ class _AddNoteFormState extends State<AddNoteForm> {
           const SizedBox(
             height: 32,
           ),
+          const ListColorsItem(),
+          const SizedBox(
+            height: 32,
+          ),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
               return CustomButton(
-                isLoading: state is AddNoteLoaded ? true : false ,
+                isLoading: state is AddNoteLoaded ? true : false,
                 text: 'add',
                 color: kPrimaryColor,
                 width: MediaQuery.of(context).size.width,
@@ -60,8 +65,9 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 onTap: () {
                   if (formkey.currentState!.validate()) {
                     formkey.currentState!.save();
-                    DateTime CurrentDate = DateTime.now();
-                    var formattedCurrentDate = DateFormat('dd-mm-yyyy').format(CurrentDate);
+                    DateTime currentDate = DateTime.now();
+                    var formattedCurrentDate =
+                        DateFormat('dd-mm-yyyy').format(currentDate);
                     var noteModel = NoteModel(
                         title: title!,
                         subTitle: subTitle!,
